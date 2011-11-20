@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:gravity="center_horizontal">
+	    <LinearLayout android:layout_height="wrap_content"
+	        android:id="@+id/linearLayout1"
+	        android:layout_width="220px">
+		        <Button android:id="@+id/bstart"
+			        android:layout_height="wrap_content"
+			        android:text="Start"
+			        android:layout_width="110px"
+			        style="@style/startButton">
+			        </Button>
+		        <Button android:id="@+id/bpause"
+			        android:layout_height="wrap_content"
+			        android:text="Stop"
+			        android:layout_width="110px"
+			        style="@style/pauseButton">
+			        </Button>
+	    </LinearLayout>
+	    <ScrollView android:id="@+id/ScrollView01"
+			android:layout_width="150px"
+			android:layout_height="fill_parent">
+				 <Button android:id="@+id/bupload"
+			        android:layout_height="wrap_content"
+			        android:text="Upload Data"
+			        android:layout_width="150px">
+			        </Button>
+		</ScrollView>
+</LinearLayout>
