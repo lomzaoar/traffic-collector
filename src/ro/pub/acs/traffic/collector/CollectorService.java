@@ -5,8 +5,6 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-import ro.pub.acs.macollector.R;
-
 import android.app.Notification;
 import android.app.PendingIntent;
 import android.app.Service;

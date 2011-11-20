@@ -13,8 +13,6 @@ import java.util.Calendar;
 
 import org.json.JSONArray;
 
-import ro.pub.acs.macollector.R;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -172,7 +170,6 @@ public class TrafficCollector extends Activity {
 	
 	public void onStop() {
 		super.onStop();
-		db.close();
 	}
 	
 	public void removeData(Database db) {
