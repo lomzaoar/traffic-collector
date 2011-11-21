@@ -69,6 +69,13 @@ public class TrafficCollector extends Activity {
             }
     };
     
+    Runnable toastRunnableNoData = new Runnable() {
+        public void run() {
+                Toast.makeText(getApplicationContext(), "No Data to Upload", Toast.LENGTH_LONG)
+                        .show();
+        }
+    };
+    
     Runnable toastRunnableFinish = new Runnable() {
             public void run() {
                    	Toast.makeText(getApplicationContext(), "Upload finished", Toast.LENGTH_LONG)
@@ -204,52 +211,60 @@ public class TrafficCollector extends Activity {
 			
 			db = new Database(thisActivity, "collector", "routes", new String[] { "lat", "long", "speed", "timestamp" });
 			
-			toastHandler.post(toastRunnableStart);
 			JSONArray elements = db.getListJson("");
-			String toSend = elements.toString();
-			try {
-				URL url = new URL("http://cipsm.hpc.pub.ro/MACollector/collector.php");
-				HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-
-				connection.setDoInput(true);
-				connection.setDoOutput(true);
-				connection.setUseCaches(false);
-				connection.setRequestMethod("POST");
-
-				connection.setRequestProperty("Connection", "Keep-Alive");
-				connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-
-				DataOutputStream dataOut = new DataOutputStream(connection.getOutputStream());
-				Calendar cal = Calendar.getInstance();
-			    SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT_NOW);
-				String filename = "journey" + URLEncoder.encode(sdf.format(cal.getTime()), "UTF-8") + ".txt";
-				
-				dataOut.writeBytes("filename=" + filename + "&elements=" + URLEncoder.encode(toSend, "UTF-8"));
-				dataOut.flush();
-				
-				BufferedReader dataIn = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-			    String line = dataIn.readLine();
-			    if(line == null) {
-			    	error = true;
-			    	toastHandler.post(toastRunnableError);
-			    	db.close();
-			    } else if(!line.equals("200") ) {
-			    	error = true;
-			    	toastHandler.post(toastRunnableError);
-			    	db.close();
-			    }
-			    dataOut.close();
-			    dataIn.close();
-			} catch (IOException e) {
-				e.printStackTrace();
+			if(elements.length() != 0)
+			{
+				toastHandler.post(toastRunnableStart);
+				String toSend = elements.toString();
+				try {
+					URL url = new URL("http://cipsm.hpc.pub.ro/MACollector/collector.php");
+					HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+	
+					connection.setDoInput(true);
+					connection.setDoOutput(true);
+					connection.setUseCaches(false);
+					connection.setRequestMethod("POST");
+	
+					connection.setRequestProperty("Connection", "Keep-Alive");
+					connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+	
+					DataOutputStream dataOut = new DataOutputStream(connection.getOutputStream());
+					Calendar cal = Calendar.getInstance();
+				    SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT_NOW);
+					String filename = "journey" + URLEncoder.encode(sdf.format(cal.getTime()), "UTF-8") + ".txt";
+					
+					dataOut.writeBytes("filename=" + filename + "&elements=" + URLEncoder.encode(toSend, "UTF-8"));
+					dataOut.flush();
+					
+					BufferedReader dataIn = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+				    String line = dataIn.readLine();
+				    System.out.println(line);
+				    if(line == null) {
+				    	error = true;
+				    	toastHandler.post(toastRunnableError);
+				    	db.close();
+				    } else if(!line.equals("200") ) {
+				    	error = true;
+				    	toastHandler.post(toastRunnableError);
+				    	db.close();
+				    }
+				    dataOut.close();
+				    dataIn.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				if(!error) {
+					toastHandler.post(toastRunnableFinish);
+					removeData(db);
+					db.close();
+				}
 			}
-			if(!error) {
-				if (uploadWakeLock.isHeld())
-					uploadWakeLock.release();
-				toastHandler.post(toastRunnableFinish);
-				removeData(db);
+			else {
+				toastHandler.post(toastRunnableNoData);
 				db.close();
 			}
+			if (uploadWakeLock.isHeld())
+				uploadWakeLock.release();
 		}
 	}
 }
