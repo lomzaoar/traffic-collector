@@ -142,20 +142,19 @@ public class CollectorService extends Service
 	{
 		//NotificationManager lNM = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 	    int lIcon = R.drawable.icon2;
-	    CharSequence lTickerText = "MACollector Service Running";
+	    CharSequence lTickerText = "Traffic Collector Service Running";
 	    long lWhen = System.currentTimeMillis();
 	
 	    Notification lNotification = new Notification(lIcon, lTickerText, lWhen);
 	    
 	    Context lContext = getApplicationContext();
-	    CharSequence lContentTitle = "MACollector";
-	    CharSequence lContentText = "MACollector Service Running!";
+	    CharSequence lContentTitle = "Traffic Collector";
+	    CharSequence lContentText = "Traffic Collector Service Running!";
 	    Intent lNotificationIntent = new Intent(this, CollectorService.class);
 	    PendingIntent lContentIntent = PendingIntent.getActivity(this, 0, lNotificationIntent, 0);
 	
 	    lNotification.setLatestEventInfo(lContext, lContentTitle, lContentText, lContentIntent);
 	    
-	    //lNM.notify(1000, lNotification);
 	    startForeground(Notification.FLAG_ONGOING_EVENT, lNotification);
 	}
 	
@@ -164,8 +163,6 @@ public class CollectorService extends Service
 	 */
 	private void hideNotification()
 	{
-		//NotificationManager lNM = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-	    //lNM.cancel(1000);
 		stopForeground(true);
 	}
 	
