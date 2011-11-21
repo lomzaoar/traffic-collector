@@ -27,6 +27,7 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
+import android.os.PowerManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -48,6 +49,9 @@ public class TrafficCollector extends Activity {
     private Database db;
     
     private Activity thisActivity;
+    
+    private PowerManager powerManager;
+    private PowerManager.WakeLock uploadWakeLock;
     
     public static final String DATE_FORMAT_NOW = "yyyy_MM_dd_HH_mm_ss";
     
@@ -76,6 +80,10 @@ public class TrafficCollector extends Activity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
+		powerManager = (PowerManager)getSystemService(Context.POWER_SERVICE);
+		uploadWakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "UploadWL");
+		
 		setContentView(R.layout.main);
 		
 		start = (Button) this.findViewById(R.id.bstart);
@@ -192,7 +200,10 @@ public class TrafficCollector extends Activity {
 		public void run() {
 			boolean error = false;
 			
+			uploadWakeLock.acquire();
+			
 			db = new Database(thisActivity, "collector", "routes", new String[] { "lat", "long", "speed", "timestamp" });
+			
 			toastHandler.post(toastRunnableStart);
 			JSONArray elements = db.getListJson("");
 			String toSend = elements.toString();
@@ -218,7 +229,11 @@ public class TrafficCollector extends Activity {
 				
 				BufferedReader dataIn = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 			    String line = dataIn.readLine();
-			    if(line == "") {
+			    if(line == null) {
+			    	error = true;
+			    	toastHandler.post(toastRunnableError);
+			    	db.close();
+			    } else if(!line.equals("200") ) {
 			    	error = true;
 			    	toastHandler.post(toastRunnableError);
 			    	db.close();
@@ -229,6 +244,8 @@ public class TrafficCollector extends Activity {
 				e.printStackTrace();
 			}
 			if(!error) {
+				if (uploadWakeLock.isHeld())
+					uploadWakeLock.release();
 				toastHandler.post(toastRunnableFinish);
 				removeData(db);
 				db.close();
