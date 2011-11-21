@@ -8,4 +8,6 @@ for($i = 0; $i < count($elements); $i++)
 	fprintf($fh, $str."\n");
 }
 fclose($fh);
-?>
+$dim = @filesize("storage/".$_POST['filename']);
+if($dim!=0)echo "200";
+else echo "500";
