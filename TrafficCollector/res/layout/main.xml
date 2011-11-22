@@ -20,13 +20,21 @@
 			        style="@style/pauseButton">
 			        </Button>
 	    </LinearLayout>
-	    <ScrollView android:id="@+id/ScrollView01"
+	    <ScrollView android:id="@+id/ScrollView"
 			android:layout_width="150px"
-			android:layout_height="fill_parent">
+			android:layout_height="wrap_content">
 				 <Button android:id="@+id/bupload"
 			        android:layout_height="wrap_content"
 			        android:text="Upload Data"
 			        android:layout_width="150px">
 			        </Button>
 		</ScrollView>
+		<TextView android:textAppearance="?android:attr/textAppearanceLarge" 
+			android:text="TextView" 
+			android:layout_height="wrap_content" 
+			android:id="@+id/status" 
+			android:layout_width="wrap_content" 
+			android:layout_below="@+id/ScrollView" 
+			android:layout_alignParentLeft="true" 
+			android:layout_marginTop="19dp"></TextView>
 </LinearLayout>

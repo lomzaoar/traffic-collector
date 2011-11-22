@@ -8,7 +8,6 @@ package ro.pub.acs.traffic.collector;
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.File;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -30,10 +29,14 @@ import android.os.Handler;
 import android.os.PowerManager;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class TrafficCollector extends Activity {
 	private Button start, pause, upload;
+	private TextView statusText;
+	
+	private String status;
 	
 	private Toast toast;
 	private long lastBackPressTime = 0;
@@ -56,31 +59,34 @@ public class TrafficCollector extends Activity {
     public static final String DATE_FORMAT_NOW = "yyyy_MM_dd_HH_mm_ss";
     
     Runnable toastRunnableStart = new Runnable() {
-            public void run() {
-                    Toast.makeText(getApplicationContext(), "Upload started", Toast.LENGTH_LONG)
-                            .show();
-            }
+    	public void run() {
+    		statusText.setText("Upload Status: Running");
+    		Toast.makeText(getApplicationContext(), "Upload started", Toast.LENGTH_LONG)
+    			.show();
+    	}
     };
     
     Runnable toastRunnableError = new Runnable() {
-            public void run() {
-                    Toast.makeText(getApplicationContext(), "Upload Error", Toast.LENGTH_LONG)
-                            .show();
-            }
+    	public void run() {
+    		statusText.setText("Upload Status: Sending Error! Please try again!");
+    		Toast.makeText(getApplicationContext(), "Upload Error", Toast.LENGTH_LONG)
+    			.show();
+    	}
     };
     
     Runnable toastRunnableNoData = new Runnable() {
-        public void run() {
-                Toast.makeText(getApplicationContext(), "No Data to Upload", Toast.LENGTH_LONG)
-                        .show();
+    	public void run() {
+    		Toast.makeText(getApplicationContext(), "No Data to Upload", Toast.LENGTH_LONG)
+    			.show();
         }
     };
     
     Runnable toastRunnableFinish = new Runnable() {
-            public void run() {
-                   	Toast.makeText(getApplicationContext(), "Upload finished", Toast.LENGTH_LONG)
-                            .show();
-            }
+    	public void run() {
+    		statusText.setText("Upload Status: Finished");
+    		Toast.makeText(getApplicationContext(), "Upload finished", Toast.LENGTH_LONG)
+    			.show();
+    	}
     };
 	
 	/** Called when the activity is first created. */
@@ -115,6 +121,11 @@ public class TrafficCollector extends Activity {
 				HandleUpload();
 			}
 		});
+		
+		status = "none";
+		statusText = (TextView)findViewById(R.id.status);
+        statusText.setText("Upload Status: " + status);
+		
 		thisActivity = this;
 	}
 	
@@ -210,11 +221,13 @@ public class TrafficCollector extends Activity {
 			uploadWakeLock.acquire();
 			
 			db = new Database(thisActivity, "collector", "routes", new String[] { "lat", "long", "speed", "timestamp" });
-			
+			for(int i = 0; i < 1000; i++)
+				db.insert(new String[]{"23", "23", "1", "1"});
 			JSONArray elements = db.getListJson("");
 			if(elements.length() != 0)
 			{
 				toastHandler.post(toastRunnableStart);
+				
 				String toSend = elements.toString();
 				try {
 					URL url = new URL("http://cipsm.hpc.pub.ro/MACollector/collector.php");
@@ -250,7 +263,10 @@ public class TrafficCollector extends Activity {
 				    }
 				    dataOut.close();
 				    dataIn.close();
-				} catch (IOException e) {
+				} catch (Exception e) {
+					error = true;
+					toastHandler.post(toastRunnableError);
+			    	db.close();
 					e.printStackTrace();
 				}
 				if(!error) {
