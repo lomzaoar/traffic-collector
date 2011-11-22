@@ -221,8 +221,6 @@ public class TrafficCollector extends Activity {
 			uploadWakeLock.acquire();
 			
 			db = new Database(thisActivity, "collector", "routes", new String[] { "lat", "long", "speed", "timestamp" });
-			for(int i = 0; i < 1000; i++)
-				db.insert(new String[]{"23", "23", "1", "1"});
 			JSONArray elements = db.getListJson("");
 			if(elements.length() != 0)
 			{
@@ -251,7 +249,6 @@ public class TrafficCollector extends Activity {
 					
 					BufferedReader dataIn = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 				    String line = dataIn.readLine();
-				    System.out.println(line);
 				    if(line == null) {
 				    	error = true;
 				    	toastHandler.post(toastRunnableError);
