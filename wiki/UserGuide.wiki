@@ -6,7 +6,7 @@ Traffic Collector is an application that gathers information about daily traffic
 
 The project is developed in a joint collaboration between University POLITEHNICA of Bucharest (http://cipsm.hpc.pub.ro/vanet/) and Rutgers University (http://discolab.rutgers.edu/). TrafficCollector can be downloaded and installed from [http://code.google.com/p/traffic-collector/downloads/list the download page].
 
-= So why should i participare ? =
+= So why should i participate ? =
 
 The Android application provides several advantages to the user.
 
