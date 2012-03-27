@@ -22,9 +22,34 @@ So why don't you give it a try today and let us know your impression?
 
 After installing the application the main screen is similar to:
 
-[http://traffic-collector.googlecode.com/svn/wiki/images/main_screem_real_time.png]
+[http://traffic-collector.googlecode.com/svn/wiki/images/main_screen.png]
 
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+You can select to *send data real-time* or not using the _Real-time_ selector. When you want to start using the application (meaning start collecting the data) you can click on the _Start_ button. When you want to stop using the application you can click the _Stop_ button. For the application to run you are asked to also start the GPS sensor (in your phone's Settings the GPS option should be selected). You know the application is running when you can see in the _Status_ the Traffic Collector service, as in this image:
+
+[http://traffic-collector.googlecode.com/svn/wiki/images/service_detail.png]
+
+When the application is _not_ in real-time mode, it collects the data in the background. It actually stores the data on your mobile phone (in SQLite), until you are ready to upload it and start using it to see all kinds of statistics. This is an appropriate mode when you don't have a 3G or WiFi connection around, so you can collect the data and upload it later on when an Internet connection becomes available. The *Upload* button can be used to start the explicit upload process.
+
+When the application is _in_ real-time mode, you will see a screen similar to:
+
+[http://traffic-collector.googlecode.com/svn/wiki/images/main_screen_menu.png]
+
+In real-time you have a unique page assigned to your real-time data. You have complete control with whom you share your position (if you even want to share it). If you want to send an URL to a Web page where another person can see your position, you can use the *Share Position* button. When you don't want to share your position anymore click on *Stop Sharing*. You can even regenerate the URL of your Web page.
+
+In the *Settings* dialog (click on the Settings within the application) you have the possibility to set parameters, see traffic statistics and see your current position. 
+
+You can see your current configuration within Settings. The screen is similar to:
+
+[http://traffic-collector.googlecode.com/svn/wiki/images/settings.png]
+
+The *name* is the string that will be used in the Google Maps attached to your own data (so that your friend would recognize you). The *username* is used by you to access your private data repository (within the application, when clicking on the link below the text *To view your statistics follow:* you are sent to your personal Web page, which requires authentication). You can even change your password (in case you forgot it) from this Settings tab.
+
+The next Settings tab lets you see several traffic statistics. The screen is similar to:
+
+[http://traffic-collector.googlecode.com/svn/wiki/images/statistics.png]
+
+Here you can see your current speed, top speed, as well as the length of your current route.
+
+You can also see your own position and what's around you in the third tab. The screen is similar to:
+
+[http://traffic-collector.googlecode.com/svn/wiki/images/map_screen.png]
