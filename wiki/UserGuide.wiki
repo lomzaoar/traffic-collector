@@ -8,7 +8,7 @@ The project is developed in a joint collaboration between University POLITEHNICA
 
 = Installing the application =
 
-Please [[http://code.google.com/p/traffic-collector/downloads/list|download] the application.
+Please [http://code.google.com/p/traffic-collector/downloads/list|download] the application.
 
 Add your content here.  Format your content with:
   * Text in *bold* or _italic_
