@@ -4,11 +4,25 @@
 
 Traffic Collector is an application that gathers information about daily traffic. The idea is to collect data that can be used to construct a model of the traffic patterns in a large city such as Bucharest. This means getting data about the traffic on a particular road, depending on the hour of the day or time of the week for example. The model can be used to make predictions about traffic, to construct smart navigation application that might tell you to avoid a certain route because it's always congested at this time of the day. Having such data anyone could construct his own mining solution to possible recognize traffic patterns (e.g., is congestion a function of season or just daily weather, are there possible streets congested just because people prefer commodity, straight and large boulevards instead of smaller adjacent routes, etc.). Anyone? Yes, anyone, because we rely on public crowds (meaning you) to collect the data, and give back freely the obtained data to anyone interesting (everything is public). 
 
-The project is developed in a joint collaboration between University POLITEHNICA of Bucharest (http://cipsm.hpc.pub.ro/vanet/) and Rutgers University (http://discolab.rutgers.edu/). 
+The project is developed in a joint collaboration between University POLITEHNICA of Bucharest (http://cipsm.hpc.pub.ro/vanet/) and Rutgers University (http://discolab.rutgers.edu/). TrafficCollector can be downloaded and installed from [http://code.google.com/p/traffic-collector/downloads/list the download page].
 
-= Installing the application =
+= So why should i participare ? =
 
-Please [http://code.google.com/p/traffic-collector/downloads/list download] the application.
+The Android application provides several advantages to the user.
+
+TrafficCollector lets you *collect* data about your traffic patterns. This means that whenever you're in traffic and use this application, you log important information about your routes and driving style. This can be use *only by you* (your own private account of data is password-protected and all data is stored encrypted for your safety) to see where you've been, how many kilometers you've drove on a daily basis, what was the average speed. You can use such data to understand your usual routes and maybe recognize a possible solution to avoid daily congestions (and minimize the time spent in traffic until you get to work, or even better - back from work). And you can use this data to see the driving utility: each time you fill in the gas tank of your car, you can anaylize how much real-life kilometers you managed to drove on the last fill.
+
+TrafficCollector lets you *share* data with friends. Maybe you want to show to the world (meaning close friends or wife) where you are in traffic, in real life. This is a solution designed to smooth the sharing of data among users, and TrafficCollector allows you to send a private URL to your friends. Your friends will see there in real-time your current driving position.
+
+TrafficCollector lets you *see* your surroundings. The application itself allows you to see where you are, and various statistics regarding your driving performance.
+
+So why don't you give it a try today and let us know your impression?
+
+= User Guide =
+
+After installing the application the main screen is similar to:
+
+
 
 Add your content here.  Format your content with:
   * Text in *bold* or _italic_
