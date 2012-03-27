@@ -1,0 +1,16 @@
+#summary One-sentence summary of this page.
+
+= Introduction =
+
+Traffic Collector is an application that gathers information about daily traffic. The idea is to collect data that can be used to construct a model of the traffic patterns in a large city such as Bucharest. This means getting data about the traffic on a particular road, depending on the hour of the day or time of the week for example. The model can be used to make predictions about traffic, to construct smart navigation application that might tell you to avoid a certain route because it's always congested at this time of the day. Having such data anyone could construct his own mining solution to possible recognize traffic patterns (e.g., is congestion a function of season or just daily weather, are there possible streets congested just because people prefer commodity, straight and large boulevards instead of smaller adjacent routes, etc.). Anyone? Yes, anyone, because we rely on public crowds (meaning you) to collect the data, and give back freely the obtained data to anyone interesting (everything is public). 
+
+The project is developed in a joint collaboration between University POLITEHNICA of Bucharest (http://cipsm.hpc.pub.ro/vanet/) and Rutgers University (http://discolab.rutgers.edu/). 
+
+= Installing the application =
+
+Please [[http://code.google.com/p/traffic-collector/downloads/list|download] the application.
+
+Add your content here.  Format your content with:
+  * Text in *bold* or _italic_
+  * Headings, paragraphs, and lists
+  * Automatic links to other wiki pages
