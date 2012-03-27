@@ -22,7 +22,7 @@ So why don't you give it a try today and let us know your impression?
 
 After installing the application the main screen is similar to:
 
-
+[http://traffic-collector.googlecode.com/svn/wiki/images/main_screem_real_time.png]
 
 Add your content here.  Format your content with:
   * Text in *bold* or _italic_
